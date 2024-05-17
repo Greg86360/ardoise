@@ -1,0 +1,37 @@
+security:
+    password_hashers:
+        App\Entity\User:
+            algorithm: auto
+
+    # Configuration du fournisseur de données des utilisateurs
+    providers:
+        # Configuration du fournisseur de données
+        app_user_provider:
+            # Utilisation de Doctrine pour charger les utilisateurs
+            entity:
+                # Classe d'entité représentant vos utilisateurs
+                class: 'App\Entity\User'
+                # Nom de la propriété qui représente le nom d'utilisateur
+                property: 'email' # ou 'username' selon votre cas
+        # used to reload user from session & other features (e.g. switch_user)
+
+    # Configuration de l'authentification
+    firewalls:
+        # Configuration du pare-feu principal
+        main:
+            # Utilisation de l'authentification via formulaire
+            form_login:
+                # URL de la page de connexion
+                login_path: 'app_login'
+                # URL de redirection après la connexion
+                check_path: 'app_login'
+                enable_csrf: true
+                default_target_path: 'app_ardoise_index'
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_login
+    access_control:
+        - { path: ^/ardoise, roles: ROLE_ADMIN }
+     
+            

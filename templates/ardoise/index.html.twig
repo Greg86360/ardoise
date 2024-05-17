@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ardoise index{% endblock %}
+
+{% block body %}
+    <h1>Ardoise index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prenom</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ardoise in ardoises %}
+            <tr>
+                <td>{{ ardoise.id }}</td>
+                <td>{{ ardoise.prenom }}</td>
+                <td>{{ ardoise.montant }}</td>
+                <td>
+                    <a href="{{ path('app_ardoise_show', {'id': ardoise.id}) }}">show</a>
+                    <a href="{{ path('app_ardoise_edit', {'id': ardoise.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ardoise_new') }}">Create new</a>
+{% endblock %}
